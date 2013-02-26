@@ -26,18 +26,8 @@
     <div class="span12">
       <section>
         <header>
-          <div class="pull-left">
-            <a id="hooks"></a>
-            <h2>Message Hooks</h2>
-          </div>
-          <div class="pull-right">
-            {% if is_owner %}
-            <a href="{{ url_for('.new_hook', p=project.name, u=user.username) }}" class="btn btn-success">
-              Create New Hook
-            </a>
-            {% endif %}
-          </div>
-          <div style="clear: both;"></div>
+          <a id="hooks"></a>
+          <h3>Message Hooks</h3>
         </header>
         <div class="content">
           <p><em>Hooks</em> are endpoints for 3rd party services (and scripts) capable of making a HTTP POST request. Hooks receive messages, which are then formatted and forwarded to <a href="#channels">IRC channels</a>.</p>
@@ -90,6 +80,11 @@
             </tbody>
           </table>
           {% endif %}
+          {% if is_owner %}
+            <a href="{{ url_for('.new_hook', p=project.name, u=user.username) }}" class="btn btn-success">
+              Create New Hook
+            </a>
+          {% endif %}
         </div>
       </section>
     </div>
@@ -103,18 +98,8 @@
     <div class="span12">
       <section>
         <header>
-          <div class="pull-left">
-            <a id="channels"></a>
-            <h2>IRC Channels</h2>
-          </div>
-          <div class="pull-right">
-            {% if is_owner %}
-            <a href="{{ url_for('.new_channel', p=project.name, u=user.username) }}" class="btn btn-success">
-              Add New Channel
-            </a>
-            {% endif %}
-          </div>
-          <div style="clear: both;"></div>
+          <a id="channels"></a>
+          <h3>IRC Channels</h3>
         </header>
         <div class="content">
           <p>Any messages received by this project will be forwarded to any of the IRC channels that have been added to them. An operator of the channel may blacklist the project, or ban the bot from entering their channel to prevent abuse.</p>
@@ -161,6 +146,11 @@
               {% endfor %}
             </tbody>
           </table>
+          {% endif %}
+          {% if is_owner %}
+          <a href="{{ url_for('.new_channel', p=project.name, u=user.username) }}" class="btn btn-success">
+            Add New Channel
+          </a>
           {% endif %}
         </div>
       </section>
