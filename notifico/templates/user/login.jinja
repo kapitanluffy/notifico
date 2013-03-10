@@ -1,0 +1,31 @@
+{% extends 'fluid_content.jinja' %}
+{% import 'ui/form.jinja' as form %}
+
+{% block page_content %}
+  {{ super() }}
+  <div class="row-fluid">
+    <div class="span4 offset4">
+      <section>
+        <header>
+          <h3>Login</h3>
+        </header>
+        <form method="POST" action="{{ url_for('user_login') }}">
+          {{ login_form.hidden_tag() }}
+          {{ form.input(login_form.username, autofocus="autofocus") }}
+          {{ form.input(login_form.password) }}
+          <div class="pull-left" style="padding-top: 4px;">
+            {% if config.PUBLIC_NEW_USERS %}
+              <small>Don't have an account? <a href="#">Sign Up.</a>
+            {% else %}
+              <small>New accounts are currently disabled.</small>
+            {% endif %}
+          </div>
+          <div class="pull-right">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+      </section>
+    </div>
+  </div>
+{% endblock page_content %}

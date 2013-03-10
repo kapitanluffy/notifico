@@ -1,0 +1,41 @@
+{# 
+  Utility macros for rendering forms/inputs.
+#}
+
+{%- macro label(field) -%}
+  <label for="{{ field.id }}">
+    {{ field.label.text }}
+    {%- if field.flags.required -%}
+      <span class="form-required">*</span>
+    {% endif %}
+  </label>
+{% endmacro %}
+
+{# Renders a single field element #}
+{%- macro input(field, class="input-block-level") -%}
+  {{ label(field) }}
+  {{ field(class=class, **kwargs)|safe }}
+  {% if field.description %}
+    <span class="help-block">
+      {{ field.description|safe }}
+    </span>
+  {% endif %}
+  {% if field.errors %}
+    {% for error in field.errors %}
+      <span class="form-error">{{ error }}</span>
+    {% endfor %}
+  {% endif %}
+
+{% endmacro %}
+
+{# Renders a simple form and its elements. #}
+{%- macro simple_form(form) -%}
+  {{ form.hidden_tag() }}
+  {% for field in form %}
+    {# We don't want to show the CSRF input #}
+    {% if field.type != "CSRFTokenField" %}
+      {{ label(field) }}
+      {{ input(field) }}
+    {% endif %}
+  {% endfor %}
+{% endmacro %}

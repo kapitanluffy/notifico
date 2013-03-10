@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page_title|default('Notifico!') }}</title>
+    <meta name="description" content="An open-source cia.vc alternative.">
+    <meta name="author" content="Tyler Kennedy">
+
+    {#
+      Global styling, included on every page and sub-template.
+    #}
+    {% block head_css %}
+    <link href="/css/bootstrap.css?v=1" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    {# 
+      Page-specific or sub-template specific css.
+    #}
+    {% block custom_css %}{% endblock custom_css %}
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    {# 
+      HTML5 shim, for IE6-8 support of HTML5 elements
+    #}
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% endblock head_css %}
+
+    {# 
+      If config.GOOGLE is set, include the typical Google Analytics async snippet
+      and set the account ID to config.GOOGLE.
+    #}
+    {% if config.GOOGLE %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{ config.GOOGLE }}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+    {% endif %}
+  </head>
+
+  <body>
+    {#
+      Page-specific or sub-template specific content.
+    #}
+    {% block body_content %}{% endblock body_content %}
+
+    {#
+      Global javascript, included on every page and sub-template.
+    #}
+    {% block body_js %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/js/jquery-1.8.3.min.js"><\/script>')</script>
+    <script src="/js/bootstrap.js"></script>
+    {#
+      Page-specific of sub-template specific javascript.
+    #}
+    {% block custom_js %}{% endblock custom_js %}
+    {% endblock body_js %}
+  </body>
+</html>

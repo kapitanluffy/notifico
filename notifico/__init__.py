@@ -89,3 +89,5 @@ def start(debug=False):
     db.create_all()
 
     return app
+
+import notifico.views.user
