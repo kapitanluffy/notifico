@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% block body_content %}
+  {{ super() }}
+  <div class="container">
+    {% block page_content %}
+    {% endblock page_content %}
+  </div>
+{% endblock body_content %}
