@@ -15,7 +15,7 @@
           {{ form.input(login_form.password) }}
           <div class="pull-left" style="padding-top: 4px;">
             {% if config.PUBLIC_NEW_USERS %}
-              <small>Don't have an account? <a href="#">Sign Up.</a>
+              <small>Don't have an account? <a href="{{ url_for('user_signup') }}">Sign Up.</a>
             {% else %}
               <small>New accounts are currently disabled.</small>
             {% endif %}

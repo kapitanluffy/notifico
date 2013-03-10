@@ -1,0 +1,29 @@
+{% extends 'fixed_content.jinja' %}
+{% import 'ui/form.jinja' as form %}
+
+{% block page_content %}
+  {{ super() }}
+  <div class="row">
+    <div class="span6 offset3">
+      <section>
+        <header>
+          <h3>Sign Up</h3>
+        </header>
+        <form method="POST" action="{{ url_for('user_signup') }}">
+          {{ signup_form.hidden_tag() }}
+          {{ form.input(signup_form.username, autofocus="autofocus") }}
+          {{ form.input(signup_form.email) }}
+          {{ form.input(signup_form.password) }}
+          {{ form.input(signup_form.confirm) }}
+          <div class="pull-left" style="padding-top: 4px;">
+            <small>Already have an account? <a href="{{ url_for('user_login') }}">Login</a> instead.</small>
+          </div>
+          <div class="pull-right">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+      </section>
+    </div>
+  </div>
+{% endblock page_content %}
