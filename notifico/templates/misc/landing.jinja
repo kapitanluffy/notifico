@@ -1,8 +1,22 @@
 {% extends "fluid_content.jinja" %}
 {% from "ui/query.jinja" import render_pagination %}
 
+{% block head_css %}
+  {{ super() }}
+  <link href="/css/prettify.css" type="text/css" rel="stylesheet" />
+{% endblock head_css %}
+
+{% block body_js %}
+  {{ super() }}
+  <script type="text/javascript" src="/js/prettify.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    prettyPrint();
+  })
+  </script>
+{% endblock body_js %}
+
 {% block page_content %}
-{% if not g.user %}
 <div class="row-fluid">
   <div class="span12">
     <div class="hero-unit homepage-unit">
@@ -12,8 +26,5 @@
     <p><small class="muted">Already have an account? <a href="{{ url_for('user_login') }}">Login</a></small></p>
     </div>
   </div>
-</div>
-{% endif %}
-<div class="big-block">
 </div>
 {% endblock page_content %}

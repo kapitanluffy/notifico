@@ -1,38 +1,48 @@
-{% extends "fluid_sidebar_content.jinja" %}
+{% extends "fluid_content.jinja" %}
 {% from "ui/query.jinja" import render_pagination %}
 
 {% block page_sidebar %}
-<div class="block">
-  <ul class="nav nav-list">
-    <li class="nav-header">Projects</li>
-    <li><a href="#"><i class="icon-plus"></i> New Project</a></li>
-    <li><a href="#"><i class="icon-github-alt"></i> Import From Github</a></li>
-  </ul>
-</div>
+
 {% endblock %}
 
 {% block page_content %}
-<div class="big-block">
-  <h2>Projects</h2>
-  {% for project in projects.items %}
-  <div class="project">
-    {% if not project.public %}
-    <i class="icon-lock icon-2x pull-left icon-muted"></i>
-    {% endif %}
-    <div class="pull-left">
-      <div class="name">
-        <a href="#">{{ project.name }}</a>
-      </div>
-      <div class="desc">
-        <small>Created {{ project.created|pretty }}</small>
-      </div>
+
+<div class="row-fluid" style="padding-bottom: 8px;">
+  <div class="span12">
+    <div class="block">
+      <ul class="nav nav-pills" style="margin-bottom: 0;">
+        <li><a href="#"><i class="icon-plus"></i> New Project</a></li>
+        <li><a href="#"><i class="icon-github-alt"></i> Import From Github</a></li>
+      </ul>
     </div>
-    <div class="metric pull-right">
-      <i class="icon-envelope"></i> {{ project.message_count }}
-    </div>
-    <div class="clearfix"></div>
   </div>
-  {% endfor %}
-  {{ render_pagination(projects, 'projects_dashboard') }}
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="big-block">
+      <h2>Projects</h2>
+      {% for project in projects.items %}
+      <div class="project">
+        {% if not project.public %}
+        <i class="icon-lock icon-2x pull-left icon-muted"></i>
+        {% endif %}
+        <div class="pull-left">
+          <div class="name">
+            <a href="#">{{ project.name }}</a>
+          </div>
+          <div class="desc">
+            <small>Created {{ project.created|pretty }}</small>
+          </div>
+        </div>
+        <div class="metric pull-right">
+          <i class="icon-envelope"></i> {{ project.message_count }}
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      {% endfor %}
+      {{ render_pagination(projects, 'projects_dashboard') }}
+    </div>
+  </div>
 </div>
 {% endblock page_content %}

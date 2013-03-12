@@ -7,13 +7,13 @@
 <div class="navbar nav-top navbar-static-top">
   <div class="navbar-inner">
     <div class="container-fluid">
-      <a class="brand" href="#">Notifico<span class="ex">!</span></a>
+      <a class="brand" href="{{ url_for('misc_landing') }}">Notifico<span class="ex">!</span></a>
       <ul class="nav pull-right">
-        {{ nav('Home', 'misc_landing') }}
         {% if g.user %}
           {{ nav('Dashboard', 'projects_dashboard') }}
           {{ nav('Logout', 'user_logout') }}
         {% else %}
+          {{ nav('Home', 'misc_landing') }}
           {{ nav('Login', 'user_login') }}
           {{ nav('Sign Up', 'user_signup') }}
         {% endif %}
