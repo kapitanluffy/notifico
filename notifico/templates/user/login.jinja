@@ -13,17 +13,18 @@
           {{ login_form.hidden_tag() }}
           {{ form.input(login_form.username, autofocus="autofocus") }}
           {{ form.input(login_form.password) }}
-          <div class="pull-left" style="padding-top: 4px;">
-            {% if config.PUBLIC_NEW_USERS %}
-              <small>Don't have an account? <a href="{{ url_for('user_signup') }}">Sign Up.</a>
-            {% else %}
-              <small>New accounts are currently disabled.</small>
-            {% endif %}
+          <div>
+            <div class="pull-left" style="padding-top: 4px;">
+              {% if config.ENABLE_SIGNUP %}
+                <small>Don't have an account? <a href="{{ url_for('user_signup') }}">Sign Up.</a></small>
+              {% else %}
+                <small>New accounts are currently disabled.</small>
+              {% endif %}
+            </div>
+            <div class="pull-right">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
           </div>
-          <div class="pull-right">
-            <button type="submit" class="btn btn-primary">Login</button>
-          </div>
-          <div class="clearfix"></div>
         </form>
       </section>
     </div>

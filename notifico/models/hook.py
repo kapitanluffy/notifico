@@ -5,7 +5,6 @@ import base64
 import datetime
 
 from notifico import db
-from notifico.services.hooks import HookService
 
 
 class Hook(db.Model):
@@ -40,10 +39,6 @@ class Hook(db.Model):
             service_id=service_id,
             project_id=project_id
         ).first()
-
-    @property
-    def hook(self):
-        return HookService.services[self.service_id]
 
     def absolute_url(self):
         hook = self.hook

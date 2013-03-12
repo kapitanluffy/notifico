@@ -61,8 +61,8 @@ TEMP_VARS = {
     'site_label': 'Notifico'
 }
 
-# Should new users be allowed to register?
-PUBLIC_NEW_USERS = True
+# Allow new users to sign up on this instance.
+ENABLE_SIGNUP = True
 
 try:
     from local_config import *

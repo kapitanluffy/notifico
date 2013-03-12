@@ -21,7 +21,7 @@ def user_required(f):
     @wraps(f)
     def _wrapped(*args, **kwargs):
         if g.user is None:
-            return redirect(url_for('account.login'))
+            return redirect(url_for('user_login'))
         return f(*args, **kwargs)
     return _wrapped
 
@@ -35,7 +35,7 @@ def group_required(name):
         @wraps(f)
         def _wrapped(*args, **kwargs):
             if g.user is None or not g.user.in_group(name):
-                return redirect(url_for('account.login'))
+                return redirect(url_for('user_login'))
             return f(*args, **kwargs)
         return _wrapped
     return _wrap
@@ -91,3 +91,5 @@ def start(debug=False):
     return app
 
 import notifico.views.user
+import notifico.views.misc
+import notifico.views.projects
