@@ -1,0 +1,19 @@
+{% extends "base.jinja" %}
+
+{% block body_content %}
+  {{ super() }}
+  {% include "nav.jinja" %}
+
+  <div class="container page-content">
+    <div class="row">
+      <div class="span3">
+        {% block page_sidebar %}
+        {% endblock page_sidebar %}
+      </div>
+      <div class="span9">
+        {% block page_content %}
+        {% endblock page_content %}
+      </div>
+    </div>
+  </div>
+{% endblock body_content %}

@@ -2,7 +2,9 @@
 
 {% block body_content %}
   {{ super() }}
-  <div class="container-fluid">
+  {% include "nav.jinja" %}
+  
+  <div class="container-fluid page-content">
     {% block page_content %}
     {% endblock page_content %}
   </div>

@@ -1,14 +1,12 @@
-{% extends 'fixed_content.jinja' %}
+{% extends 'fluid_content.jinja' %}
 {% import 'ui/form.jinja' as form %}
 
 {% block page_content %}
   {{ super() }}
-  <div class="row">
+  <div class="row-fluid">
     <div class="span6 offset3">
-      <section>
-        <header>
-          <h3>Login</h3>
-        </header>
+      <div class="big-block">
+        <h2>Login</h2>
         <form method="POST" action="{{ url_for('user_login') }}">
           {{ login_form.hidden_tag() }}
           {{ form.input(login_form.username, autofocus="autofocus") }}
@@ -24,9 +22,10 @@
             <div class="pull-right">
               <button type="submit" class="btn btn-primary">Login</button>
             </div>
+            <div class="clearfix"></div>
           </div>
         </form>
-      </section>
+      </div>
     </div>
   </div>
 {% endblock page_content %}

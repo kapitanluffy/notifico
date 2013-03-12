@@ -1,34 +1,12 @@
 @import "mixins.less";
 
 html, body {
-  background-color: #E8E8E8;
-  background-image: url('/img/subtle_grunge.png');
   height: 100%;
+  background: url('/img/subtle_grunge.png');
 }
 
 html, body, p {
   font-family: 'Open Sans', sans-serif;
-}
-
-.wrapper {
-  min-height: 100%;
-  position: relative;
-  overflow: auto;
-}
-
-.footer {
-  position: relative;
-  margin-top: -40px;
-  clear: both;
-
-  padding-top: 10px;
-  padding-bottom: 8px;
-  font-size: 75%;
-}
-
-.table-vertical td {
-  vertical-align: middle;
-  border-top: none;
 }
 
 .btn,
@@ -66,30 +44,12 @@ form {
 
 .homepage-unit {
   background-color: white;
-  border: 1px solid #d4d4d4;
   .border-radius(0px);
   .box-shadow(~"0 1px 5px rgba(0,0,0,0.1), inset 0 1px 0 white");
-  #gradient > .vertical(#F9F9F9, #EDEDED);
 }
 
 .table-square {
   border: 1px solid #ddd;
-}
-
-.metric {
-  text-align: center;
-
-  section {
-    #gradient > .vertical(#F9F9F9, #EDEDED);
-  }
-  
-  strong {
-    display: block;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    font-size: 32px;
-    font-weight: 200;
-  }
 }
 
 [class^="icon-"] {
@@ -103,52 +63,95 @@ form {
 }
 
 .nav-top {
-  padding-top: 20px;
+  @nav_link_color: black;
+  @nav_height: 24px;
+  @nav_background: white;
+
+  border-bottom: 6px solid #FF3D7F;
+
+  .brand {
+    color: @nav_link_color;
+    line-height: @nav_height;
+    font-size: 20px;
+    font-weight: 200;
+    font-family: 'Lobster', cursive;
+    padding: 13px 20px 9px;
+
+    .ex {
+      font-weight: 600;
+      color: #FF3D7F;
+    }
+  }
+
+  .nav > li > a,
+  .nav > .active > a {
+    font-family: 'Open Sans', sans-serif;
+    padding: 13px 15px 9px;
+  }
+
+  .navbar-inner {
+    .border-radius(0);
+    #gradient > .vertical(#FFFFFF, #FFFFFF);
+    border: none;
+    .box-shadow(none);
+  }
+
+  .nav {
+    li {
+      line-height: @nav_height;
+    }
+
+    .active {
+      a,
+      a:focus,
+      a:hover {
+        background: @nav_background;
+        .box-shadow(none);
+        color: #FF3D7F;
+      }
+    }
+  }
 }
 
-.navbar-inner {
-  .border-radius(0);
-}
-
-/* Nixed from Genghis */
-section {
+.block {
   background-color: white;
-  margin:  20px 0;
-  padding: 20px;
-  border: 1px solid #d4d4d4;
-  .border-radius(0);
-  .box-shadow(~"0 1px 5px rgba(0,0,0,0.1), inset 0 1px 0 white");
+  padding: 10px 8px 10px 8px;
+}
 
-  > header {
-    .border-radius(4px 4px 0 0);
-    margin: -20px -20px 20px;
-    padding: 9px 20px;
-    background-color: #f5f5f5;
-    #gradient > .vertical(#FFFFFF, #F2F2F2);
-    border-bottom: 1px solid #ddd;
-    .box-shadow(inset 0 1px 0 white);
+.big-block {
+  background-color: white;
+  padding: 10px 20px 10px 20px;
 
-    h2 {
-      font-size:   24px;
-      margin:      0;
-      line-height: 30px;
-    }
-    h3 {
-      font-size:   14px;
-      margin:      0;
-      line-height: 20px;
-    }
-  }
-
-  > p:first-child {
-    margin-top: 0;
-  }
-
-  > p:last-child {
-    margin-bottom: 0;
+  h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    font-size: 26px;
+    border-bottom: 2px solid #FF3D7F;
+    margin: 0 0 10px 0;
   }
 }
 
-.content {
+.block,
+.big-block {
+  .box-shadow(~"0 1px 5px rgba(0,0,0,0.1), inset 0 1px 0 white");
+}
+
+.page-content {
+  padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.project {
+  margin-bottom: 12px;
+  border-bottom: 1px dashed #f9f9f9;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  .name {
+    font-size: 16px;
+  }
+
+  .metric {
+
+  }
 }

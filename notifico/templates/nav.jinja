@@ -1,0 +1,23 @@
+{% macro nav(label, end) %}
+<li class="{% if request.endpoint.startswith(end) %}active{% endif %}">
+  <a href="{{ url_for(end) }}">{{ label }}</a>
+</li>
+{% endmacro %}
+
+<div class="navbar nav-top navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="brand" href="#">Notifico<span class="ex">!</span></a>
+      <ul class="nav pull-right">
+        {{ nav('Home', 'misc_landing') }}
+        {% if g.user %}
+          {{ nav('Dashboard', 'projects_dashboard') }}
+          {{ nav('Logout', 'user_logout') }}
+        {% else %}
+          {{ nav('Login', 'user_login') }}
+          {{ nav('Sign Up', 'user_signup') }}
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
