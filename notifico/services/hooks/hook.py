@@ -2,10 +2,10 @@
 __all__ = ('HookService',)
 import re
 
+from flask import current_app
 import redis
 from jinja2 import Environment, PackageLoader
 
-from notifico import app
 from notifico.util import irc
 from notifico.services import Service
 from notifico.services.messages import MessageService
@@ -68,9 +68,9 @@ class HookService(object):
         Returns a Redis connection instance.
         """
         return redis.StrictRedis(
-            host=app.config['REDIS_HOST'],
-            port=app.config['REDIS_PORT'],
-            db=app.config['REDIS_DB']
+            host=current_app.config['REDIS_HOST'],
+            port=current_app.config['REDIS_PORT'],
+            db=current_app.config['REDIS_DB']
         )
 
     @classmethod

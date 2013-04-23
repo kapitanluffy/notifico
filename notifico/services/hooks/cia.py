@@ -1,17 +1,16 @@
 # -*- coding: utf8 -*-
-__all__ = ('CIAHook',)
+__all__ = ('CIAHook', 'handler')
 import xmltodict
 
 from flask import url_for, request, abort
 from flask.ext import wtf
 from flask.ext.xmlrpc import XMLRPCHandler
 
-from notifico import app, db
+from notifico import db
 from notifico.services.hooks import HookService
 
 
 handler = XMLRPCHandler('hub')
-handler.connect(app, '/RPC2')
 hub = handler.namespace('hub')
 
 
