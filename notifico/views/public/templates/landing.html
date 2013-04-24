@@ -2,11 +2,9 @@
 
 {% block content_page %}
 <div class="landing-unit">
+  <h1>Notifico!</h1>
   <p class="lead">
     Notifico is an <a href="https://github.com/TkTech/notifico">open-source</a> replacement for the now-defunct <a href="http://cia.vc">cia.vc</a> service. Notifico receives messages from services (such as github) and tools (such as a command line script) and delivers them to IRC channels.
-  </p>
-  <p class="lead">
-    This Notifico instance has delivered {{ total_messages }} messages for {{ total_users }} users across {{ total_projects }} projects.
   </p>
   {% if not g.user %}
   <p><a class="btn btn-success btn-large" href="{{ url_for('account.register') }}">Sign Up!</a></p>
