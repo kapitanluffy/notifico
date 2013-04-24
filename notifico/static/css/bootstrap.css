@@ -6441,10 +6441,14 @@ ol.inline > li {
   border-bottom: 2px solid #EEE;
 }
 .sidebar {
+  position: fixed;
+  overflow-y: scroll;
+  top: 0;
+  left: 0;
+  bottom: 0;
   background-color: #f5f5f5;
   border-right: 1px solid #FA6900;
   width: 200px;
-  float: left;
   height: 100%;
   margin-left: 0;
 }
@@ -6473,6 +6477,16 @@ ol.inline > li {
   color: #FA6900;
   background-color: transparent;
   border-right: 2px solid #FA6900;
+}
+.landing-stats {
+  background-color: #f5f5f5;
+  border: 1px solid #FA6900;
+  text-align: center;
+  padding: 12px 4px 12px 4px;
+}
+.landing-stats .stat {
+  font-size: 24px;
+  font-weight: 200;
 }
 .pull-right {
   float: right;

@@ -11,4 +11,38 @@
   <p><small class="muted">Already have an account? <a href="{{ url_for('account.login') }}">Login</a> instead.</small></p>
   {% endif %}
 </div>
+<h2>FAQ</h2>
+<dl>
+  <dt>Q. Can I use Notifico for private projects?</dt>
+  <dd>
+    You bet you can! You can mark projects and channels as private when you create them.
+    Messages from private projects will not have their contents logged and will not
+    show up for anyone but yourself and the admins.
+  </dd>
+  <dt>Q. How much does it cost?</dt>
+  <dd>
+    Absolutely nothing! If you want to help, why not knock a ticket off the
+    <a href="https://github.com/TkTech/notifico/issues?state=open">issue tracker</a>?
+  </dd>
+  <dt>Q. Can I sync with Github?</dt>
+  <dd>
+    Yup! Notifico can sync with github, importing your projects and setting up
+    hooks on Github automatically.
+  </dd>
+</dl>
+<h2>Stats</h2>
+<div class="row-fluid">
+  <div class="landing-stats span4">
+    <div class="stat">{{ total_messages }}</div>
+    <small class="muted">Messages</small>
+  </div>
+  <div class="landing-stats span4">
+    <div class="stat">{{ total_projects }}</div>
+    <small class="muted">Projects</small>
+  </div>
+  <div class="landing-stats span4">
+    <div class="stat">{{ total_users }}</div>
+    <small class="muted">Users</small>
+  </div>
+</div>
 {% endblock %}
