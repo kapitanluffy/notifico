@@ -11,7 +11,6 @@ from flask import (
 from flask.ext.cache import Cache
 from flask.ext.sqlalchemy import SQLAlchemy
 from raven.contrib.flask import Sentry
-from werkzeug.contrib.cache import RedisCache
 
 from notifico.util import pretty
 

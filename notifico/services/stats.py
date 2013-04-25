@@ -2,13 +2,9 @@
 """
 A collection of utility methods for common site statistics.
 """
-from functools import wraps
-
-from flask import current_app, g
 from sqlalchemy import func
 
 from notifico import db, cache
-
 from notifico.models import Project, Channel, User
 
 
