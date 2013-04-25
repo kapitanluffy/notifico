@@ -26,6 +26,11 @@ def total_users():
 
 
 @cache.memoize(timeout=60 * 5)
+def total_projects():
+    return Project.query.count()
+
+
+@cache.memoize(timeout=60 * 5)
 def top_networks(limit=20):
     return (
         db.session.query(

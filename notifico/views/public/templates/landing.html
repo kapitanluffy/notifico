@@ -7,7 +7,7 @@
     Notifico is an <a href="https://github.com/TkTech/notifico">open-source</a> replacement for the now-defunct <a href="http://cia.vc">cia.vc</a> service. Notifico receives messages from services (such as github) and tools (such as a command line script) and delivers them to IRC channels.
   </p>
   {% if not g.user %}
-  <p><a class="btn btn-success btn-large" href="{{ url_for('account.register') }}">Sign Up!</a></p>
+  <p><a class="btn btn-signup btn-flat btn-large" href="{{ url_for('account.register') }}">Sign Up!</a></p>
   <p><small class="muted">Already have an account? <a href="{{ url_for('account.login') }}">Login</a> instead.</small></p>
   {% endif %}
 </div>
@@ -20,6 +20,8 @@
       <small class="muted">Created {{ project.created | pretty_date }}</small>
     </div>
     {% endfor %}
+    <br />
+    <a href="#" class="btn btn-primary btn-flat">View All Projects</a>
   </div>
   <div class="span6">
     <h3>Popular Networks</h3>
@@ -29,6 +31,8 @@
       <small class="muted">{{ network.count | plural('{v} channel', '{v} channels')}}</small>
     </div>
     {% endfor %}
+    <br />
+    <a href="#" class="btn btn-primary btn-flat">View All Networks</a>
   </div>
 </div>
 {% endblock %}

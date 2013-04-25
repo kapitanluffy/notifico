@@ -107,5 +107,6 @@ def create_instance():
     from notifico.services import stats
     app.jinja_env.globals['g_total_messages'] = stats.total_messages
     app.jinja_env.globals['g_total_users'] = stats.total_users
+    app.jinja_env.globals['g_total_projects'] = stats.total_projects
 
     return app

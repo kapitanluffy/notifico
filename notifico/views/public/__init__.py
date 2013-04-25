@@ -19,13 +19,13 @@ def landing():
         Project.query
         .filter_by(public=True)
         .order_by(Project.created.desc())
-        .limit(20)
+        .limit(10)
     )
 
     return render_template(
         'landing.html',
         recent_projects=recent_projects,
-        top_networks=stats.top_networks(limit=20)
+        top_networks=stats.top_networks(limit=10)
     )
 
 
