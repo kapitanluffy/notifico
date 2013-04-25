@@ -2,7 +2,7 @@
 """
 Utilities for pretty-printing data[types].
 """
-__all__ = ('pretty_date',)
+__all__ = ('pretty_date', 'plural')
 from datetime import datetime
 
 
@@ -42,3 +42,7 @@ def pretty_date(time=False):
     if day_diff < 365:
         return str(day_diff / 30) + " months ago"
     return str(day_diff / 365) + " years ago"
+
+
+def plural(v, singular, plural):
+    return plural.format(v=v) if v > 1 else singular.format(v=v)

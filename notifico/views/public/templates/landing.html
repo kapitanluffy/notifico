@@ -63,6 +63,12 @@
   </div>
   <div class="span6">
     <h3>Popular Networks</h3>
+    {% for network in top_networks %}
+    <div class="top-network odds">
+      {{ network.host }}
+      <small class="muted">{{ network.count | plural('{v} channel', '{v} channels')}}</small>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
