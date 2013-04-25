@@ -3,7 +3,7 @@ from flask import (
     render_template
 )
 
-from notifico.models import User, Project
+from notifico.models import Project
 from notifico.services import stats
 
 public = Blueprint('public', __name__, template_folder='templates')
@@ -15,10 +15,6 @@ def landing():
     Show a landing page giving a short intro blurb to unregistered
     users.
     """
-    total_messages = stats.total_messages()
-    total_users = User.query.count()
-    total_projects = Project.query.count()
-
     recent_projects = (
         Project.query
         .filter_by(public=True)
@@ -28,9 +24,14 @@ def landing():
 
     return render_template(
         'landing.html',
-        total_messages=total_messages,
-        total_users=total_users,
-        total_projects=total_projects,
         recent_projects=recent_projects,
-        top_networks=stats.top_networks().limit(20)
+        top_networks=stats.top_networks(limit=20)
     )
+
+
+@public.route('/faq')
+def faq():
+    """
+    Shows a simple FAQ listing.
+    """
+    return render_template('faq.html')

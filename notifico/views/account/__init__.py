@@ -117,7 +117,7 @@ def login():
         u = User.by_username(form.username.data)
         session['_u'] = u.id
         session['_uu'] = u.username
-        return redirect(url_for('projects.dashboard', u=u.username))
+        return redirect(url_for('public.landing', u=u.username))
 
     return render_template('login.html', form=form)
 

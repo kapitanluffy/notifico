@@ -1,13 +1,14 @@
 # -*- coding: utf8 -*-
 from functools import wraps
 
-from redis import StrictRedis
+from redis import Redis
 from flask import (
     Flask,
     g,
     redirect,
     url_for
 )
+from flask.ext.cache import Cache
 from flask.ext.sqlalchemy import SQLAlchemy
 from raven.contrib.flask import Sentry
 from werkzeug.contrib.cache import RedisCache
@@ -16,6 +17,7 @@ from notifico.util import pretty
 
 db = SQLAlchemy()
 sentry = Sentry()
+cache = Cache()
 
 
 def user_required(f):
@@ -74,12 +76,18 @@ def create_instance():
             sentry.init_app(app)
 
     # Setup our redis connection (which is already thread safe)
-    app.redis = StrictRedis(
+    app.redis = Redis(
         host=app.config['REDIS_HOST'],
         port=app.config['REDIS_PORT'],
         db=app.config['REDIS_DB']
     )
-    app.cache = RedisCache(app.redis, key_prefix='cache_')
+    cache.init_app(app, config={
+        'CACHE_TYPE': 'redis',
+        'CACHE_REDIS_HOST': app.redis,
+        'CACHE_OPTIONS': {
+            'key_prefix': 'cache_'
+        }
+    })
     db.init_app(app)
 
     # Initialize all our blueprints
@@ -96,5 +104,9 @@ def create_instance():
     # Setup some custom Jinja2 filters.
     app.jinja_env.filters['pretty_date'] = pretty.pretty_date
     app.jinja_env.filters['plural'] = pretty.plural
+
+    from notifico.services import stats
+    app.jinja_env.globals['g_total_messages'] = stats.total_messages
+    app.jinja_env.globals['g_total_users'] = stats.total_users
 
     return app

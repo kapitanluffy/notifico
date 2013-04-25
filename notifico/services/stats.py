@@ -2,38 +2,45 @@
 """
 A collection of utility methods for common site statistics.
 """
+from functools import wraps
+
 from flask import current_app, g
 from sqlalchemy import func
 
-from notifico import db
-from notifico.models import Project, Channel
+from notifico import db, cache
+
+from notifico.models import Project, Channel, User
 
 
-def total_messages(cache=False, timeout=60 * 5):
+@cache.memoize(timeout=60 * 5)
+def total_messages():
     """
     Sum the total number of messages across all projects.
     """
-    if cache:
-        total = current_app.get('message_total')
-        if total is not None:
-            return total
-
     total = db.session.query(
         func.sum(Project.message_count)
     ).scalar()
 
-    if cache:
-        cache.set('message_total', total, timeout=timeout)
-
     return total
 
 
-def top_networks():
+@cache.memoize(timeout=60 * 5)
+def total_users():
+    return User.query.count()
+
+
+@cache.memoize(timeout=60 * 5)
+def top_networks(limit=20):
     return (
-        Channel.visible(db.session.query(
+        db.session.query(
             Channel.host,
-            func.count(func.distinct(Channel.channel)).label('count')
-        ), user=g.user)
+            func.count(func.distinct(Channel.channel)).label('count'),
+        )
+        .join(Channel.project).filter(
+            Project.public == True,
+            Channel.public == True
+        )
         .group_by(Channel.host)
         .order_by('count desc')
-    )
+        .limit(limit)
+    ).all()

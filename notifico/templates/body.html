@@ -8,8 +8,17 @@
   {{ project.name }}
 </a>
 {% endmacro %}
+
 {% macro active(end) %}
 {% if request.endpoint.startswith(end) %}active{% endif %}
+{% endmacro %}
+
+{% macro nav(end, text, icon) %}
+  <li class="{{ active(end) }}">
+    <a href="{{ url_for(end) }}">
+      {% if icon %}<i class="{{ icon }}"></i> {% endif -%}{{ text }}
+    </a>
+  </li>
 {% endmacro %}
 
 <!DOCTYPE html>
@@ -52,30 +61,28 @@
       </header>
       <div class="sidebar-content">
         <div class="sidebar-nav nav nav-list">
-          <li class="active">
-            <a href="{{ url_for('public.landing') }}">
-              <i class="icon-home"></i>Welcome!
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="icon-group"></i> Network Status
-            </a>
-          </li>
+          {{ nav('public.landing', 'Welcome!', 'icon-home') }}
+          {{ nav('public.faq', 'FAQ', 'icon-question-sign') }}
+          {{ nav('account.logout', 'Network Status', 'icon-group') }}
           <li class="divider"></li>
-          {% if not g.user %}
+          {% if g.user %}
+          {# A user is already logged in #}
+          {{ nav('account.logout', 'Logout', 'icon-signout') }}
+          {% else %}
           {# No user is logged in so show the public account menu. #}
-          <li>
-            <a href="{{ url_for('account.register') }}">
-              <i class="icon-plus"></i> Sign Up
-            </a>
-          </li>
-          <li>
-            <a href="{{ url_for('account.login') }}">
-              <i class="icon-signin"></i>Login
-            </a>
-          </li>
+          {{ nav('account.register', 'Sign Up', 'icon-plus') }}
+          {{ nav('account.login', 'Login', 'icon-signin') }}
           {% endif %}
+          <li class="divider"></li>
+        </div>
+        {# Quick-stats #}
+        <div class="landing-stats">
+          <div class="stat">{{ g_total_messages() }}</div>
+          <small>Messages</small>
+        </div>
+        <div class="landing-stats">
+          <div class="stat">{{ g_total_users() }}</div>
+          <small>Users</small>
         </div>
       </div>
     </div>
