@@ -3,8 +3,6 @@
 @pallete_1: #b94a48;
 
 html, body {
-  //background-color: #f6f6f6;
-  background-color: white;
   height: 100%;
 }
 
@@ -84,6 +82,7 @@ ol.inline > li {
 
   padding-top: 20px;
   padding-left: 220px;
+  padding-bottom: 20px;
 
   .content_main {
     background-color: @sidebar_background;
@@ -133,6 +132,7 @@ ol.inline > li {
       font-size: 30px;
       font-weight: 300;
       padding-left: @content_padding;
+      padding-top: 20px;
     }
   }
 
@@ -163,6 +163,9 @@ ol.inline > li {
   }
 }
 
+/*
+ * Landing page components.
+ */
 .landing-stats {
   background-color: #f5f5f5;
   border: 1px solid #FA6900;
@@ -173,4 +176,14 @@ ol.inline > li {
     font-size: 24px;
     font-weight: 200;
   }
+}
+
+.recent-project {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+}
+
+.odds:nth-child(odd) {
+  background-color: #f5f5f5;
 }

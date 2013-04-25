@@ -29,6 +29,11 @@
     Yup! Notifico can sync with github, importing your projects and setting up
     hooks on Github automatically.
   </dd>
+  <dt>Q. Can I run a copy myself (such as inside the company firewall)?</dt>
+  <dd>
+    Yup! You can <a href="https://github.com/TkTech/notifico">grab the source</a> and
+    get it running in a few minutes.
+  </dd>
 </dl>
 <h2>Stats</h2>
 <div class="row-fluid">
@@ -43,6 +48,21 @@
   <div class="landing-stats span4">
     <div class="stat">{{ total_users }}</div>
     <small class="muted">Users</small>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Newest Projects</h3>
+    {% for project in recent_projects %}
+    <div class="recent-project odds">
+      {{ project.owner.username }}/{{ project.name }}
+      <small class="muted">Created {{ project.created | pretty_date }}</small>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="span6">
+    <h3>Popular Networks</h3>
   </div>
 </div>
 {% endblock %}

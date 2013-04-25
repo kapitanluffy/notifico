@@ -19,9 +19,17 @@ def landing():
     total_users = User.query.count()
     total_projects = Project.query.count()
 
+    recent_projects = (
+        Project.query
+        .filter_by(public=True)
+        .order_by(Project.created.desc())
+        .limit(20)
+    )
+
     return render_template(
         'landing.html',
         total_messages=total_messages,
         total_users=total_users,
-        total_projects=total_projects
+        total_projects=total_projects,
+        recent_projects=recent_projects
     )

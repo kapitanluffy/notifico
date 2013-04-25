@@ -6354,7 +6354,6 @@ a.badge:hover {
 }
 html,
 body {
-  background-color: white;
   height: 100%;
 }
 html,
@@ -6420,6 +6419,7 @@ ol.inline > li {
 .content {
   padding-top: 20px;
   padding-left: 220px;
+  padding-bottom: 20px;
 }
 .content .content_main {
   background-color: #ffffff;
@@ -6456,6 +6456,7 @@ ol.inline > li {
   font-size: 30px;
   font-weight: 300;
   padding-left: 20px;
+  padding-top: 20px;
 }
 .sidebar .nav {
   margin: 0 0 25px 0;
@@ -6478,6 +6479,9 @@ ol.inline > li {
   background-color: transparent;
   border-right: 2px solid #FA6900;
 }
+/*
+ * Landing page components.
+ */
 .landing-stats {
   background-color: #f5f5f5;
   border: 1px solid #FA6900;
@@ -6487,6 +6491,14 @@ ol.inline > li {
 .landing-stats .stat {
   font-size: 24px;
   font-weight: 200;
+}
+.recent-project {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 8px;
+}
+.odds:nth-child(odd) {
+  background-color: #f5f5f5;
 }
 .pull-right {
   float: right;

@@ -12,6 +12,8 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from raven.contrib.flask import Sentry
 from werkzeug.contrib.cache import RedisCache
 
+from notifico.util.pretty import pretty_date
+
 db = SQLAlchemy()
 sentry = Sentry()
 
@@ -90,5 +92,8 @@ def create_instance():
     # cia.vc XML-RPC kludge.
     from notifico.services.hooks.cia import handler
     handler.connect(app, '/RPC2')
+
+    # Setup some custom Jinja2 filters.
+    app.jinja_env.filters['pretty_date'] = pretty_date
 
     return app
