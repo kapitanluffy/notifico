@@ -92,9 +92,11 @@ def create_instance():
     # Initialize all our blueprints
     from notifico.views.account import account
     from notifico.views.public import public
+    from notifico.views.projects import projects
 
     app.register_blueprint(account, url_prefix='/account')
     app.register_blueprint(public)
+    app.register_blueprint(projects)
 
     # cia.vc XML-RPC kludge.
     from notifico.services.hooks.cia import handler

@@ -20,7 +20,12 @@ from notifico.models import User, AuthToken
 account = Blueprint('account', __name__, template_folder='templates')
 # Usernames that cannot be registered because they clash with internal
 # routes.
-_reserved = ('new',)
+_reserved = (
+    'new',
+    'faq',
+    'my-projects',
+    'account'
+)
 
 
 class UserRegisterForm(wtf.Form):

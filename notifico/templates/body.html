@@ -18,6 +18,7 @@
     <a href="{{ url_for(end) }}">
       {% if icon %}<i class="{{ icon }}"></i> {% endif -%}{{ text }}
     </a>
+      {% if caller %}{{ caller() }}{% endif -%}
   </li>
 {% endmacro %}
 
@@ -33,6 +34,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     {% block style %}
     {% endblock style %}
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -55,18 +57,26 @@
   </head>
 
   <body>
-    <div class="sidebar span2">
+    <div class="sidebar">
       <header>
         <h1>Notifico!</h1>
       </header>
       <div class="sidebar-content">
-        <div class="sidebar-nav nav nav-list">
+        <ul class="sidebar-nav nav nav-list">
           {{ nav('public.landing', 'Welcome!', 'icon-home') }}
           {{ nav('public.faq', 'FAQ', 'icon-question-sign') }}
           {{ nav('account.logout', 'Network Status', 'icon-group') }}
           <li class="divider"></li>
           {% if g.user %}
           {# A user is already logged in #}
+          {% call nav('projects.my_projects', 'My Projects', 'icon-star') %}
+            <ul class="nav nav-list">
+              {{ nav('account.logout', 'New Project', 'icon-plus') }}
+              {{ nav('account.logout', 'Github Sync', 'icon-github-alt') }}
+            </ul>
+          {% endcall %}
+          <li class="divider"></li>
+          {{ nav('account.settings', 'Settings', 'icon-cogs') }}
           {{ nav('account.logout', 'Logout', 'icon-signout') }}
           {% else %}
           {# No user is logged in so show the public account menu. #}

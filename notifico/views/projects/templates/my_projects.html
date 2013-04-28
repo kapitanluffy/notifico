@@ -1,0 +1,22 @@
+{% extends "no_sidebar.html" %}
+
+{% block content_page %}
+<h1>My Projects ({{ projects.count() }})</h1>
+{% if not projects %}
+{# This user doesn't have any projects yet. #}
+<div class="alert alert-info">
+  You don't have any projects yet. You can create a new one or sync with github.
+</div>
+{% else %}
+{% for project in projects %}
+<div class="user-project odds">
+  <div class="user-project-name">
+  {% if not project.public %}
+    <i class="icon-lock"></i>
+  {% endif %}{{ project.name }}
+  </div>
+  <small class="muted">Created {{ project.created | pretty_date }}</small>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
