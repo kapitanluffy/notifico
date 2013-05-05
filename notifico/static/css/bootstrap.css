@@ -6443,50 +6443,6 @@ ol.inline > li {
 /*
  * Landing page components.
  */
-.btn-signup {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #e74c3c;
-  background-image: -moz-linear-gradient(top, #e74c3c, #e74c3c);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#e74c3c), to(#e74c3c));
-  background-image: -webkit-linear-gradient(top, #e74c3c, #e74c3c);
-  background-image: -o-linear-gradient(top, #e74c3c, #e74c3c);
-  background-image: linear-gradient(to bottom, #e74c3c, #e74c3c);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe74c3c', endColorstr='#ffe74c3c', GradientType=0);
-  border-color: #e74c3c #e74c3c #bf2718;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #e74c3c;
-  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-}
-.btn-signup:hover,
-.btn-signup:active,
-.btn-signup.active,
-.btn-signup.disabled,
-.btn-signup[disabled] {
-  color: #ffffff;
-  background-color: #e74c3c;
-  *background-color: #e43725;
-}
-.btn-signup:active,
-.btn-signup.active {
-  background-color: #d62c1a \9;
-}
-.btn-signup:hover,
-.btn-signup:active,
-.btn-signup.active,
-.btn-signup.disabled,
-.btn-signup[disabled] {
-  color: #ffffff;
-  background-color: #e74c3c;
-  *background-color: #e43725;
-}
-.btn-signup:active,
-.btn-signup.active {
-  background-color: #d62c1a \9;
-}
 .top-network,
 .recent-project {
   padding-top: 6px;
