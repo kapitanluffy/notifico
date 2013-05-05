@@ -13,8 +13,8 @@
 {% if request.endpoint.startswith(end) %}active{% endif %}
 {% endmacro %}
 
-{% macro nav(end, text, icon) %}
-  <li class="{{ active(end) }}">
+{% macro nav(end, text, icon, active_=None) %}
+  <li class="{{ active(active_ or end) }}">
     <a href="{{ url_for(end) }}">
       {% if icon %}<i class="{{ icon }}"></i> {% endif -%}{{ text }}
     </a>
@@ -62,7 +62,7 @@
         <ul class="nav">
           {{ nav('public.landing', 'Home', 'icon-home') }}
           {% if g.user %}
-          {{ nav('projects.my_projects', 'My Projects', 'icon-reorder') }}
+          {{ nav('projects.my_projects', 'My Projects', 'icon-reorder', 'projects.') }}
           {% endif %}
         </ul>
         <ul class="nav pull-right">
