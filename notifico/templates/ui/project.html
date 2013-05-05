@@ -18,9 +18,9 @@
           {%- endif -%}
           {%- if show_user -%}
             <a href="{{ url_for('projects.user_projects', username=project.owner.username) }}">
-              {{ project.owner.username }}</a>/
+              {{ project.owner.username }}</a> <span class="muted">/</span>&nbsp;
           {%- endif -%}
-          {{ project.name }}
+          <a href="{{ url_for('projects.user_project', username=project.owner.username, projectname=project.name) }}">{{ project.name }}</a>
         </div>
         <div class="project-details">
           <small class="muted">created {{ project.created|pretty_date }}</small>

@@ -81,6 +81,38 @@ def user_projects(username):
     )
 
 
+@projects.route('/<username>/<projectname>')
+def user_project(username, projectname):
+    """
+    Provides an overview of a single user project.
+    """
+    user = User.by_username(username)
+    if user is None:
+        return abort(404)
+
+    project = Project.by_name_and_owner(projectname, user)
+    if project is None:
+        return abort(404)
+
+    if not project.can_see(g.user):
+        return redirect(url_for('public.landing'))
+
+    # Make sure only channels the user should be able to see are
+    # shown.
+    can_modify = project.can_modify(g.user)
+    visible_channels = project.channels
+    if not can_modify:
+        visible_channels = visible_channels.filter_by(public=True)
+
+    return render_template(
+        'user_project.html',
+        user=user,
+        project=project,
+        can_modify=can_modify,
+        channels=visible_channels
+    )
+
+
 @projects.route('/new/project', methods=['GET', 'POST'])
 @projects.route('/new/project/<username>', methods=['GET', 'POST'])
 @user_required
@@ -135,6 +167,7 @@ def new_project(username=None):
             user.projects.append(p)
             # And save it.
             db.session.commit()
+            # TODO: Support Channel Lists.
             # TODO: Go directly to project details page.
             return redirect(
                 url_for('.user_projects', username=user.username)

@@ -62,6 +62,22 @@ class Project(db.Model):
 
         return False
 
+    def can_see(self, user):
+        """
+        Returns ``True`` if `user` can see this project.
+        """
+        # Admins can always see projects.
+        if user and user.in_group('admin'):
+            return True
+        elif user and user.id == self.owner.id:
+            # The owner of the project can always see it.
+            return True
+        elif self.public:
+            # Public projects are always visible.
+            return True
+
+        return False
+
     @classmethod
     def visible_projects(cls, user=None):
         q = cls.query

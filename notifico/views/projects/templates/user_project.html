@@ -1,0 +1,189 @@
+{% extends "no_sidebar.html" %}
+
+{% block style %}
+  {{ super() }}
+  <style>
+  .c-channelname,
+  .c-servicename {
+    width: 100%;
+  }
+  .c-ssl,
+  .c-port,
+  .c-messages {
+    text-align: center !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .c-actions ul {
+    margin: 0;
+  }
+  </style>
+{% endblock %}
+
+{% block content_page %}
+<div class="section-box">
+  <h3>
+    <a href="{{ url_for('.user_projects', username=user.username) }}">{{ user.username }}</a>
+    &nbsp;<span class="muted">/</span>&nbsp;
+    {{ project.name }}
+  </h3>
+  <ul class="inline">
+    <li>
+      <i class="icon-envelope"></i> {{ project.message_count }}<br />
+      <small class="muted"># of messages</small>
+    </li>
+    <li>
+      <i class="icon-calendar"></i> {{ project.created|pretty_date }}<br />
+      <small class="muted">created</small>
+    </li>
+    {% if project.website %}
+    <li>
+      <i class="icon-globe"></i><a href="{{ project.website }}" rel="nofollow">{{ project.website|truncate(25, True) }}</a></br>
+      <small class="muted">website</small>
+    </li>
+    {% endif %}
+  </ul>
+  <div class="section-box">
+    <h3>Hooks</h3>
+    {% if can_modify %}
+    <ul class="inline">
+      <li>
+        <a href="#" class="btn btn-flat btn-success">
+          <i class="icon-plus"></i> New Hook
+        </a>
+      </li>
+    </ul>
+    {% endif %}
+    {% if not project.hooks.count() %}
+    <div class="alert alert-info">
+      This project doesn't have any hooks yet.
+    </div>
+    {% else %}
+    <div class="row-fluid">
+      <div class="span12 section">
+        <table class="table table-striped table-vertical">
+          <thead>
+            <tr>
+              <th class="c-servicename">service</th>
+              <th class="c-messages">messages</th>
+              {% if can_modify %}
+              <th class="c-actions"></th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for hook in project.hooks %}
+            <tr>
+              <td>
+                <div class="servicename">
+                  {{ hook.hook.SERVICE_NAME }}
+                </div>
+                <small class="muted">added {{ hook.created|pretty_date }}</small>
+              </td>
+              <td class="c-messages">
+                {{ hook.message_count }}
+              </td>
+              {% if can_modify %}
+              <td class="c-actions" nowrap>
+                <ul class="inline">
+                  <li>
+                    <a href="#" class="btn btn-flat btn-success">
+                      <i class="icon-pencil"></i> Edit
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn btn-flat btn-danger">
+                      <i class="icon-remove"></i> Delete
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="section-box">
+    <h3>Channels</h3>
+    {% if can_modify %}
+    <ul class="inline">
+      <li>
+        <a href="#" class="btn btn-flat btn-success">
+          <i class="icon-plus"></i> New Channel
+        </a>
+      </li>
+    </ul>
+    {% endif %}
+    {% if not channels.count() %}
+    <div class="alert alert-info">
+      This project doesn't have any channels yet.
+    </div>
+    {% else %}
+    <div class="row-fluid">
+      <div class="span12 section">
+        <table class="table table-striped table-vertical">
+          <thead>
+            <tr>
+              <th class="c-channelname">channel</th>
+              <th class="c-port">port</th>
+              <th class="c-ssl">ssl</th>
+              {% if can_modify %}
+              <th class="c-actions"></th>
+              {% endif %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for channel in channels %}
+            <tr>
+              <td>
+                <div class="channelname">
+                  {%- if not channel.public -%}
+                    <i class="icon-lock pull-left" alt="[This is a private project]" title="This is a private project"></i> 
+                  {%- endif -%}
+                  {{ channel.channel }} <span class="muted">on</span> {{ channel.host}}
+                </div>
+                <small class="muted">added {{ channel.created|pretty_date }}</small>
+              </td>
+              <td class="c-port">
+                {{ channel.port }}
+              </td>
+              <td class="c-ssl">
+                {% if channel.ssl %}
+                <i class="icon-ok"></i>
+                {% else %}
+                <i class="icon-remove"></i>
+                {% endif %}
+              </td>
+              {% if can_modify %}
+              <td class="c-actions" nowrap>
+                <ul class="inline">
+                  <li>
+                    <a href="#" class="btn btn-flat btn-success">
+                      <i class="icon-pencil"></i> Edit
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="btn btn-flat btn-danger">
+                      <i class="icon-remove"></i> Delete
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}
