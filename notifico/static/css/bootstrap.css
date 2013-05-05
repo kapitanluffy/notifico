@@ -6463,6 +6463,15 @@ ol.inline > li {
   font-weight: 200;
   margin-bottom: 0;
 }
+.section-box a:hover,
+.section-box a:focus {
+  text-decoration: none;
+  color: #e74c3c;
+}
+.section-box .btn:hover,
+.section-box .btn:focus {
+  color: white;
+}
 .section-box .section {
   background: white;
   border: 1px solid #ccc;
