@@ -6,13 +6,15 @@ from flask import (
     redirect,
     url_for,
     abort,
-    flash
+    flash,
+    request
 )
 from flask.ext import wtf
 
 from notifico import user_required, db
-from notifico.models import Project, User
+from notifico.models import Project, User, Hook
 from notifico.services.stats import total_messages
+from notifico.services.hooks import HookService
 
 projects = Blueprint('projects', __name__, template_folder='templates')
 
@@ -178,3 +180,36 @@ def new_project(username=None):
         form=form,
         user=user
     )
+
+
+@projects.route('/h/<int:pid>/<key>', methods=['GET', 'POST'])
+def hook_receive(pid, key):
+    """
+    Endpoint for Hook requests from outside parties.
+    """
+    # TODO: Check referer?
+    h = Hook.query.filter_by(key=key, project_id=pid).first()
+    if not h or not h.project:
+        # The hook being pushed to doesn't exist, has been deleted,
+        # or is a leftover from a project cull (which destroyed the project
+        # but not the hooks associated with it).
+        return abort(404)
+
+    # Increment the hooks message_count....
+    Hook.query.filter_by(id=h.id).update({
+        Hook.message_count: Hook.message_count + 1
+    })
+    # ... and the project-wide message_count.
+    Project.query.filter_by(id=h.project.id).update({
+        Project.message_count: Project.message_count + 1
+    })
+
+    hook = HookService.services.get(h.service_id)
+    if hook is None:
+        # TODO: This should be logged somewhere.
+        return ''
+
+    hook._request(h.project.owner, request, h)
+
+    g.db.session.commit()
+    return ''

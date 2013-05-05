@@ -9,7 +9,8 @@
   }
   .c-ssl,
   .c-port,
-  .c-messages {
+  .c-messages,
+  .c-link {
     text-align: center !important;
     padding-left: 12px !important;
     padding-right: 12px !important;
@@ -68,7 +69,7 @@
               <th class="c-servicename">service</th>
               <th class="c-messages">messages</th>
               {% if can_modify %}
-              <th class="c-actions"></th>
+              <th class="c-link" nowrap>webhook url</th>
               {% endif %}
             </tr>
           </thead>
@@ -79,25 +80,20 @@
                 <div class="servicename">
                   {{ hook.hook.SERVICE_NAME }}
                 </div>
-                <small class="muted">added {{ hook.created|pretty_date }}</small>
+                <small class="muted">
+                  added {{ hook.created|pretty_date }}
+                  {% if can_modify %}
+                  | <a href="#"><i class="icon-pencil"></i> Edit</a>
+                  - <a href="#"><i class="icon-remove"></i> Delete</a>
+                  {% endif %}
+                </small>
               </td>
               <td class="c-messages">
                 {{ hook.message_count }}
               </td>
               {% if can_modify %}
-              <td class="c-actions" nowrap>
-                <ul class="inline">
-                  <li>
-                    <a href="#" class="btn btn-flat btn-success">
-                      <i class="icon-pencil"></i> Edit
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="btn btn-flat btn-danger">
-                      <i class="icon-remove"></i> Delete
-                    </a>
-                  </li>
-                </ul>
+              <td class="c-link" nowrap>
+                <a href="{{ url_for('.hook_receive', pid=project.id, key=hook.key) }}">copy me</a>
               </td>
               {% endif %}
             </tr>
@@ -133,9 +129,6 @@
               <th class="c-channelname">channel</th>
               <th class="c-port">port</th>
               <th class="c-ssl">ssl</th>
-              {% if can_modify %}
-              <th class="c-actions"></th>
-              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -148,7 +141,13 @@
                   {%- endif -%}
                   {{ channel.channel }} <span class="muted">on</span> {{ channel.host}}
                 </div>
-                <small class="muted">added {{ channel.created|pretty_date }}</small>
+                <small class="muted">
+                  added {{ channel.created|pretty_date }}
+                  {% if can_modify %}
+                  | <a href="#"><i class="icon-pencil"></i> Edit</a>
+                  - <a href="#"><i class="icon-remove"></i> Delete</a>
+                  {% endif %}
+                </small>
               </td>
               <td class="c-port">
                 {{ channel.port }}
@@ -160,22 +159,6 @@
                 <i class="icon-remove"></i>
                 {% endif %}
               </td>
-              {% if can_modify %}
-              <td class="c-actions" nowrap>
-                <ul class="inline">
-                  <li>
-                    <a href="#" class="btn btn-flat btn-success">
-                      <i class="icon-pencil"></i> Edit
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="btn btn-flat btn-danger">
-                      <i class="icon-remove"></i> Delete
-                    </a>
-                  </li>
-                </ul>
-              </td>
-              {% endif %}
             </tr>
             {% endfor %}
           </tbody>
