@@ -10,8 +10,12 @@
         {{ forms.render_field(form.username) }}
         {{ forms.render_field(form.password) }}
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Login</button>
-          <a href="{{ url_for('.register') }}" class="btn">Register</a>
+          <button type="submit" class="btn btn-flat btn-success">
+            <i class="icon-ok"></i> Login
+          </button>
+          <a href="{{ url_for('.register') }}" class="btn btn-flat btn-info">
+            Register
+          </a>
         </div>
       </form>
     </div>
