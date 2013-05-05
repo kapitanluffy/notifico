@@ -59,22 +59,20 @@
   <body>
     <div class="navbar navbar-static-top">
       <div class="navbar-inner">
-        <div class="container-fluid">
-          <ul class="nav">
-            {{ nav('public.landing', 'Home', 'icon-home') }}
-            {% if g.user %}
-            {{ nav('projects.my_projects', 'My Projects', 'icon-reorder') }}
-            {% endif %}
-          </ul>
-          <ul class="nav pull-right">
-            {% if g.user %}
-            {{ nav('account.logout', 'Logout', 'icon-signout') }}
-            {% else %}
-            {{ nav('account.register', 'Sign Up', 'icon-plus') }}
-            {{ nav('account.login', 'Login', 'icon-signin') }}
-            {% endif %}
-          </ul>
-        </div>
+        <ul class="nav">
+          {{ nav('public.landing', 'Home', 'icon-home') }}
+          {% if g.user %}
+          {{ nav('projects.my_projects', 'My Projects', 'icon-reorder') }}
+          {% endif %}
+        </ul>
+        <ul class="nav pull-right">
+          {% if g.user %}
+          {{ nav('account.logout', 'Logout', 'icon-signout') }}
+          {% else %}
+          {{ nav('account.register', 'Sign Up', 'icon-plus') }}
+          {{ nav('account.login', 'Login', 'icon-signin') }}
+          {% endif %}
+        </ul>
       </div>
     </div>
     <div class="content">
