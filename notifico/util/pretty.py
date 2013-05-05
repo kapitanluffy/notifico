@@ -12,7 +12,7 @@ def pretty_date(time=False):
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
     """
-    now = datetime.now()
+    now = datetime.utcnow()
     diff = now - time
     second_diff = diff.seconds
     day_diff = diff.days
