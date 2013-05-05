@@ -6440,6 +6440,10 @@ ol.inline > li {
   font-weight: 200;
   text-transform: uppercase;
 }
+.alert-top-level {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 /*
  * Landing page components.
  */
