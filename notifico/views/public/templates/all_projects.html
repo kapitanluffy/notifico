@@ -1,0 +1,26 @@
+{% extends "no_sidebar.html" %}
+{% from 'ui/page.html' import render_pagination %}
+{% from 'ui/project.html' import render_project_list %}
+
+{% block style %}
+  {{ super() }}
+  <style>
+  .c-project {
+    width: 100% !important;
+  }
+  .c-messages, .c-hooks, .c-channels {
+    text-align: center !important;
+  }
+  </style>
+{% endblock %}
+
+{% block content_page %}
+<div class="row-fluid">
+  <div class="span12 section-box">
+    <h3>All Projects</h3>
+    <div class="section">
+      {{ render_project_list(pagination.items, show_user=True) }}
+      {{ render_pagination(pagination, '.all_projects', **request.args) }}
+    </div>
+  </div>
+{% endblock %}

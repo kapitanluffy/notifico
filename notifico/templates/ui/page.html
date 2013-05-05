@@ -13,11 +13,3 @@
     </ul>
   </div>
 {% endmacro %}
-
-{% macro link_p(project) %}
-<a href="{{ url_for('projects.dashboard', u=project.owner.username) }}">
-  {{ project.owner.username }}
-</a> / <a href="{{ url_for('projects.details', u=project.owner.username, p=project.name) }}">
-  {{ project.name }}
-</a>
-{% endmacro %}

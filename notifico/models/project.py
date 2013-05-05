@@ -68,3 +68,22 @@ class Project(db.Model):
             return True
 
         return False
+
+    @classmethod
+    def visible_projects(cls, user=None):
+        q = cls.query
+
+        if user and user.in_group('admin'):
+            # Admins always have full visibility.
+            pass
+        elif user:
+            # If there's a logged in user, he can see all of his
+            # own projects and other user's public projects.
+            q = q.filter(or_(
+                Project.owner_id == user.id,
+                Project.public == True
+            ))
+        else:
+            q = q.filter(Project.public == True)
+
+        return q
