@@ -1,0 +1,24 @@
+{% extends "no_sidebar.html" %}
+{% import "ui/forms.html" as forms %}
+
+{% block content_page %}
+<div class="section-box">
+  <h3>New Project</h3>
+  <div class="section">
+    <form class="form form-horizontal" method='POST' action="{{ url_for('.new_project', username=user.username) }}">
+      {{ form.hidden_tag() }}
+      {{ forms.render_field(form.name) }}
+      {{ forms.render_field(form.website ) }}
+      {{ forms.render_field(form.public) }}
+      <div class="form-actions">
+        <button type="submit" class="btn btn-flat btn-success">
+          <i class="icon-ok"></i> Create Project
+        </button>
+        <a href="{{ url_for('.user_projects', username=user.username) }}" class="btn btn-flat btn-danger">
+          <i class="icon-remove"></i> Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

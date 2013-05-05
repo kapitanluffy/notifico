@@ -3,6 +3,7 @@ __all__ = ('Project',)
 import datetime
 
 from sqlalchemy import or_
+from sqlalchemy.orm import validates
 from sqlalchemy.ext.hybrid import hybrid_property
 
 from notifico import db
@@ -12,7 +13,11 @@ from notifico.models import CaseInsensitiveComparator
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    created = db.Column(db.TIMESTAMP(), default=datetime.datetime.utcnow)
+    created = db.Column(
+        db.TIMESTAMP(),
+        default=datetime.datetime.utcnow,
+        nullable=False
+    )
     public = db.Column(db.Boolean, default=True)
     website = db.Column(db.String(1024))
 
@@ -23,14 +28,6 @@ class Project(db.Model):
 
     full_name = db.Column(db.String(101), nullable=False, unique=True)
     message_count = db.Column(db.Integer, default=0)
-
-    @classmethod
-    def new(cls, name, public=True, website=None):
-        c = cls()
-        c.name = name.strip()
-        c.public = public
-        c.website = website.strip() if website else None
-        return c
 
     @hybrid_property
     def name_i(self):
@@ -87,3 +84,7 @@ class Project(db.Model):
             q = q.filter(Project.public == True)
 
         return q
+
+    @validates('website')
+    def validates_website(self, key, website):
+        return website.strip() if website else website

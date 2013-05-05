@@ -19,7 +19,7 @@ def total_messages(user=None):
     if user:
         q = q.filter(Project.owner_id == user.id)
 
-    return q.scalar()
+    return q.scalar() or 0
 
 
 @cache.memoize(timeout=60 * 5)

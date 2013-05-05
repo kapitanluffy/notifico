@@ -16,21 +16,6 @@
 {% block content_page %}
 <div class="section-box">
   <h3>Projects</h3>
-  {% if not projects.count() %}
-  {# This user doesn't have any projects yet. #}
-    {% if can_modify %}
-    <div class="alert alert-info alert-block">
-      <h4>Hey there!</h4>
-      You don't have any projects yet. You can <a class="btn btn-mini btn-flat btn-success" href="#"><i class="icon-plus"></i> create one</a>
-      or <a class="btn btn-mini btn-flat btn-success" href="#"><i class="icon-github"></i> import from github</a>.
-    </div>
-    {% else %}
-    <div class="alert alert-info alert-block">
-      <h4>Hey there!</h4>
-      This user doesn't seem to have any projects yet.
-    </div>
-    {% endif %}
-  {% else %}
   <ul class="inline">
     <li>
       <i class="icon-envelope"></i> {{ total_messages }}<br />
@@ -45,19 +30,35 @@
       <small class="muted">joined</small>
     </li>
   </ul>
+  {% if can_modify %}
+  <ul class="inline">
+    <li>
+      <a href="{{ url_for('.new_project', username=user.username) }}" class="btn btn-flat btn-success">
+        <i class="icon-plus"></i> New Project
+      </a>
+    </li>
+    <li>
+      <a href="#" class="btn btn-flat btn-info"><i class="icon-github"></i> Sync with Github</a>
+    </li>
+  </ul>
+  {% endif %}
+  {% if not projects.count() %}
+  {# This user doesn't have any projects yet. #}
+    {% if can_modify %}
+    <div class="alert alert-info alert-block">
+      <h4>Hey there!</h4>
+      You don't have any projects yet.
+    </div>
+    {% else %}
+    <div class="alert alert-info alert-block">
+      <h4>Hey there!</h4>
+      This user doesn't have any public projects.
+    </div>
+    {% endif %}
+  {% else %}
   <div class="row-fluid">
     <div class="span12 section">
-      {{ render_project_list(projects) }}
-      {% if can_modify %}
-      <ul class="inline">
-        <li>
-          <a href="#" class="btn btn-flat btn-success"><i class="icon-plus"></i> New Project</a>
-        </li>
-        <li>
-          <a href="#" class="btn btn-flat btn-info"><i class="icon-github"></i> Sync with Github</a>
-        </li>
-      </ul>
-      {% endif %}
+      {{ render_project_list(projects) }}      
     </div>
   </div>
   {% endif %}
