@@ -1,9 +1,9 @@
 @import "mixins.less";
 
-@pallete_1: #b94a48;
-
 html, body {
   height: 100%;
+  background-color: #f1f1f1;
+  background-image: url(/img/gray_jean.png);
 }
 
 html, body, p {
@@ -86,127 +86,29 @@ ol.inline > li {
 }
 
 .content {
-  @sidebar_background: white;
-  @content_background: white;
-
-  padding-top: 20px;
-  padding-left: 220px;
   padding-bottom: 20px;
 
   .content_main {
-    background-color: @sidebar_background;
-
-    .content_sidebar {
-
-    }
-
     .content_page {
-      background-color: @content_background;
-
       // Fix the padding
       .contents {
         padding: 0 20px 12px 20px;
       }
 
       h1, h2, h3, h4, h5 {
+        font-weight: 200;
         text-transform: uppercase;
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #EEE;
       }
-
     }
-  }
-}
-
-.sidebar {
-  @content_padding: 20px;
-
-  position: fixed;
-  overflow-y: scroll;
-  top: 0;
-  left: 0;
-  bottom: 0;
-
-  background-color: #f5f5f5;
-  border-right: 1px solid #FA6900;
-
-  width: 200px;
-  height: 100%;
-  
-  margin-left: 0;
-
-  header {
-    h1 {
-      font-size: 30px;
-      font-weight: 300;
-      padding-left: @content_padding;
-      padding-top: 20px;
-    }
-  }
-
-  .nav {
-    margin: 0 0 25px 0;
-  }
-  .nav > li > a {
-    display: block;
-    color: #666;
-    padding: 4px 25px;
-  }
-  .nav > li > a:hover,
-  .nav > li > a:focus {
-    text-decoration: none;
-    border-right: 2px solid #FA6900;
-  }
-  .nav > .active > a,
-  .nav > .active:hover > a,
-  .nav > .active:focus > a {
-    text-shadow: none;
-    color: #FA6900;
-    background-color: transparent;
-    border-right: 2px solid #FA6900;
-  }
-
-  .nav .nav {
-    display: none;
-    margin-bottom: 5px;
-  }
-  .nav > .active > ul {
-    display: block;
-  }
-  .nav .nav > li > a {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 35px;
-    font-size: 90%;
-    margin-left: -25px;
-    margin-right: -30px;
-  }
-
-  .sidebar-content {
-    
   }
 }
 
 /*
  * Landing page components.
  */
-.landing-stats {
-  text-align: center;
-  padding: 12px 4px 12px 4px;
-
-  .stat {
-    font-size: 24px;
-    font-weight: 200;
-  }
-}
 
 .btn-signup {
   .buttonBackground(#E74C3C, #E74C3C);
-}
-
-.btn-primary {
-  .buttonBackground(#2980B9, #2980B9);
 }
 
 .top-network,
@@ -228,7 +130,61 @@ ol.inline > li {
   padding-bottom: 12px;
   padding-left: 12px;
 
-  &:nth-child(odd) {
+  &:nth-child(even) {
     background-color: #f5f5f5;
+  }
+
+  .buttons {
+    display: none;
+    padding-right: 20px;
+  }
+
+  &:hover {
+    .buttons {
+      display: block;
+    }
+  }
+}
+
+.section-box {
+  h3 {
+    text-transform: uppercase;
+    padding-bottom: 10px;
+    font-weight: 200;
+    margin-bottom: 0;
+  }
+
+  .section {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }
+}
+
+/*
+ * Site header navbar.
+ */
+ 
+.navbar {
+  margin-bottom: 4px;
+
+  .navbar-inner {
+    filter:progid:DXImageTransform.Microsoft.Gradient(enabled='false');
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background-image: none;
+    background-color: white;
+    .border-radius(0px);
+
+    .nav > .active > a,
+    .nav > .active > a:hover,
+    .nav > .active > a:focus {
+      color: #e74c3c;
+      background-color: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
   }
 }

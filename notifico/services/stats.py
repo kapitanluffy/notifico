@@ -9,15 +9,17 @@ from notifico.models import Project, Channel, User
 
 
 @cache.memoize(timeout=60 * 5)
-def total_messages():
+def total_messages(user=None):
     """
     Sum the total number of messages across all projects.
     """
-    total = db.session.query(
+    q = db.session.query(
         func.sum(Project.message_count)
-    ).scalar()
+    )
+    if user:
+        q = q.filter(Project.owner_id == user.id)
 
-    return total
+    return q.scalar()
 
 
 @cache.memoize(timeout=60 * 5)

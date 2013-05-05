@@ -6355,6 +6355,8 @@ a.badge:hover {
 html,
 body {
   height: 100%;
+  background-color: #f1f1f1;
+  background-image: url(/img/gray_jean.png);
 }
 html,
 body,
@@ -6425,15 +6427,7 @@ ol.inline > li {
   *zoom: 1;
 }
 .content {
-  padding-top: 20px;
-  padding-left: 220px;
   padding-bottom: 20px;
-}
-.content .content_main {
-  background-color: #ffffff;
-}
-.content .content_main .content_page {
-  background-color: #ffffff;
 }
 .content .content_main .content_page .contents {
   padding: 0 20px 12px 20px;
@@ -6443,76 +6437,12 @@ ol.inline > li {
 .content .content_main .content_page h3,
 .content .content_main .content_page h4,
 .content .content_main .content_page h5 {
+  font-weight: 200;
   text-transform: uppercase;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #EEE;
-}
-.sidebar {
-  position: fixed;
-  overflow-y: scroll;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #f5f5f5;
-  border-right: 1px solid #FA6900;
-  width: 200px;
-  height: 100%;
-  margin-left: 0;
-}
-.sidebar header h1 {
-  font-size: 30px;
-  font-weight: 300;
-  padding-left: 20px;
-  padding-top: 20px;
-}
-.sidebar .nav {
-  margin: 0 0 25px 0;
-}
-.sidebar .nav > li > a {
-  display: block;
-  color: #666;
-  padding: 4px 25px;
-}
-.sidebar .nav > li > a:hover,
-.sidebar .nav > li > a:focus {
-  text-decoration: none;
-  border-right: 2px solid #FA6900;
-}
-.sidebar .nav > .active > a,
-.sidebar .nav > .active:hover > a,
-.sidebar .nav > .active:focus > a {
-  text-shadow: none;
-  color: #FA6900;
-  background-color: transparent;
-  border-right: 2px solid #FA6900;
-}
-.sidebar .nav .nav {
-  display: none;
-  margin-bottom: 5px;
-}
-.sidebar .nav > .active > ul {
-  display: block;
-}
-.sidebar .nav .nav > li > a {
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 35px;
-  font-size: 90%;
-  margin-left: -25px;
-  margin-right: -30px;
 }
 /*
  * Landing page components.
  */
-.landing-stats {
-  text-align: center;
-  padding: 12px 4px 12px 4px;
-}
-.landing-stats .stat {
-  font-size: 24px;
-  font-weight: 200;
-}
 .btn-signup {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -6557,50 +6487,6 @@ ol.inline > li {
 .btn-signup.active {
   background-color: #d62c1a \9;
 }
-.btn-primary {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #2980b9;
-  background-image: -moz-linear-gradient(top, #2980b9, #2980b9);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2980b9), to(#2980b9));
-  background-image: -webkit-linear-gradient(top, #2980b9, #2980b9);
-  background-image: -o-linear-gradient(top, #2980b9, #2980b9);
-  background-image: linear-gradient(to bottom, #2980b9, #2980b9);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2980b9', endColorstr='#ff2980b9', GradientType=0);
-  border-color: #2980b9 #2980b9 #1b557a;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #2980b9;
-  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
-
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-}
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary.active,
-.btn-primary.disabled,
-.btn-primary[disabled] {
-  color: #ffffff;
-  background-color: #2980b9;
-  *background-color: #2472a4;
-}
-.btn-primary:active,
-.btn-primary.active {
-  background-color: #20638f \9;
-}
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary.active,
-.btn-primary.disabled,
-.btn-primary[disabled] {
-  color: #ffffff;
-  background-color: #2980b9;
-  *background-color: #2472a4;
-}
-.btn-primary:active,
-.btn-primary.active {
-  background-color: #20638f \9;
-}
 .top-network,
 .recent-project {
   padding-top: 6px;
@@ -6619,8 +6505,52 @@ ol.inline > li {
   padding-bottom: 12px;
   padding-left: 12px;
 }
-.user-project:nth-child(odd) {
+.user-project:nth-child(even) {
   background-color: #f5f5f5;
+}
+.user-project .buttons {
+  display: none;
+  padding-right: 20px;
+}
+.user-project:hover .buttons {
+  display: block;
+}
+.section-box h3 {
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  font-weight: 200;
+  margin-bottom: 0;
+}
+.section-box .section {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+/*
+ * Site header navbar.
+ */
+.navbar {
+  margin-bottom: 4px;
+}
+.navbar .navbar-inner {
+  filter: progid:DXImageTransform.Microsoft.Gradient(enabled='false');
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-image: none;
+  background-color: white;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.navbar .navbar-inner .nav > .active > a,
+.navbar .navbar-inner .nav > .active > a:hover,
+.navbar .navbar-inner .nav > .active > a:focus {
+  color: #e74c3c;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 .pull-right {
   float: right;

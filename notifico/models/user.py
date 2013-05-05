@@ -118,6 +118,19 @@ class User(db.Model):
 
         self.groups.append(Group.get_or_create(name=name))
 
+    def can_modify(self, user):
+        """
+        Returns ``True`` if `user` can modify this user.
+        """
+        # Admins can always modify projects.
+        if user and user.in_group('admin'):
+            return True
+
+        if user and user.id == self.id:
+            return True
+
+        return False
+
     def export(self):
         """
         Exports the user, his projects, and his hooks for use in a

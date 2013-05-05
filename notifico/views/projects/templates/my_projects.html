@@ -1,22 +1,99 @@
 {% extends "no_sidebar.html" %}
 
+{% block style %}
+  {{ super() }}
+  <style>
+  .c-project {
+    width: 100% !important;
+  }
+  .c-messages, .c-hooks, .c-channels {
+    text-align: center !important;
+  }
+  </style>
+{% endblock %}
+
 {% block content_page %}
-<h1>My Projects ({{ projects.count() }})</h1>
-{% if not projects %}
-{# This user doesn't have any projects yet. #}
-<div class="alert alert-info">
-  You don't have any projects yet. You can create a new one or sync with github.
-</div>
-{% else %}
-{% for project in projects %}
-<div class="user-project odds">
-  <div class="user-project-name">
-  {% if not project.public %}
-    <i class="icon-lock"></i>
-  {% endif %}{{ project.name }}
+<div class="section-box">
+  <h3>Projects</h3>
+  {% if not projects.count() %}
+  {# This user doesn't have any projects yet. #}
+    {% if can_modify %}
+    <div class="alert alert-info alert-block">
+      <h4>Hey there!</h4>
+      You don't have any projects yet. You can <a class="btn btn-mini btn-flat btn-success" href="#"><i class="icon-plus"></i> create one</a>
+      or <a class="btn btn-mini btn-flat   btn-success" href="#"><i class="icon-github"></i> import from github</a>.
+    </div>
+    {% else %}
+    <div class="alert alert-info alert-block">
+      <h4>Hey there!</h4>
+      This user doesn't seem to have any projects yet.
+    </div>
+    {% endif %}
+  {% else %}
+  <ul class="inline">
+    <li>
+      <i class="icon-envelope"></i> {{ total_messages }}<br />
+      <small class="muted"># of messages</small>
+    </li>
+    <li>
+      <i class="icon-reorder"></i> {{ projects.count() }}<br />
+      <small class="muted"># of projects</small>
+    </li>
+    <li>
+      <i class="icon-calendar"></i> {{ user.joined|pretty_date }}<br />
+      <small class="muted">joined</small>
+    </li>
+  </ul>
+  <div class="row-fluid">
+    <div class="span12 section">
+      <table class="table table-striped table-vertical">
+        <thead>
+          <tr>
+            <th class="c-project">project</th>
+            <th class="c-messages">messages</th>
+            <th class="c-hooks">hooks</th>
+            <th class="c-channels">channels</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+          <tr>
+            <td>
+              <div class="project-name">
+                {%- if not project.public -%}
+                  <i class="icon-lock pull-left" alt="[This is a private project]" title="This is a private project"></i> 
+                {%- endif -%}
+                {{ project.name }}
+              </div>
+              <div class="project-details">
+                <small class="muted">created {{ project.created|pretty_date }}</small>
+              </div>
+            </td>
+            <td class="c-messages">
+              {{ project.message_count }}
+            </td>
+            <td class="c-hooks">
+              {{ project.hooks.count() }}
+            </td>
+            <td class="c-channels">
+              {{ project.channels.count() }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% if can_modify %}
+      <ul class="inline">
+        <li>
+          <a href="#" class="btn btn-flat btn-success"><i class="icon-plus"></i> New Project</a>
+        </li>
+        <li>
+          <a href="#" class="btn btn-flat btn-info"><i class="icon-github"></i> Sync with Github</a>
+        </li>
+      </ul>
+      {% endif %}
+    </div>
   </div>
-  <small class="muted">Created {{ project.created | pretty_date }}</small>
+  {% endif %}
 </div>
-{% endfor %}
-{% endif %}
 {% endblock %}

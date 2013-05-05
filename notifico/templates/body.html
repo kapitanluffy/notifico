@@ -57,46 +57,23 @@
   </head>
 
   <body>
-    <div class="sidebar">
-      <header>
-        <h1>Notifico!</h1>
-      </header>
-      <div class="sidebar-content">
-        <ul class="sidebar-nav nav nav-list">
-          {{ nav('public.landing', 'Welcome!', 'icon-home') }}
-          {{ nav('public.faq', 'FAQ', 'icon-question-sign') }}
-          {{ nav('account.logout', 'Network Status', 'icon-group') }}
-          <li class="divider"></li>
-          {% if g.user %}
-          {# A user is already logged in #}
-          {% call nav('projects.my_projects', 'My Projects', 'icon-star') %}
-            <ul class="nav nav-list">
-              {{ nav('account.logout', 'New Project', 'icon-plus') }}
-              {{ nav('account.logout', 'Github Sync', 'icon-github-alt') }}
-            </ul>
-          {% endcall %}
-          <li class="divider"></li>
-          {{ nav('account.settings', 'Settings', 'icon-cogs') }}
-          {{ nav('account.logout', 'Logout', 'icon-signout') }}
-          {% else %}
-          {# No user is logged in so show the public account menu. #}
-          {{ nav('account.register', 'Sign Up', 'icon-plus') }}
-          {{ nav('account.login', 'Login', 'icon-signin') }}
-          {% endif %}
-          <li class="divider"></li>
-        </div>
-        {# Quick-stats #}
-        <div class="landing-stats">
-          <div class="stat">{{ g_total_messages() }}</div>
-          <small>Messages</small>
-        </div>
-        <div class="landing-stats">
-          <div class="stat">{{ g_total_projects() }}</div>
-          <small>Projects</small>
-        </div>
-        <div class="landing-stats">
-          <div class="stat">{{ g_total_users() }}</div>
-          <small>Users</small>
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <ul class="nav">
+            {{ nav('public.landing', 'Home', 'icon-home') }}
+            {% if g.user %}
+            {{ nav('projects.my_projects', 'My Projects', 'icon-reorder') }}
+            {% endif %}
+          </ul>
+          <ul class="nav pull-right">
+            {% if g.user %}
+            {{ nav('account.logout', 'Logout', 'icon-signout') }}
+            {% else %}
+            {{ nav('account.register', 'Sign Up', 'icon-plus') }}
+            {{ nav('account.login', 'Login', 'icon-signin') }}
+            {% endif %}
+          </ul>
         </div>
       </div>
     </div>
