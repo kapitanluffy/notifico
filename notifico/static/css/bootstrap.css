@@ -6485,10 +6485,15 @@ ol.inline > li {
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
-.navbar .navbar-inner .nav > .active > a,
+.navbar .navbar-inner .nav > li > a:hover,
+.navbar .navbar-inner .nav > li > a:focus,
 .navbar .navbar-inner .nav > .active > a:hover,
 .navbar .navbar-inner .nav > .active > a:focus {
   color: #e74c3c;
+}
+.navbar .navbar-inner .nav > .active > a,
+.navbar .navbar-inner .nav > .active > a:hover,
+.navbar .navbar-inner .nav > .active > a:focus {
   background-color: transparent;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;

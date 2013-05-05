@@ -154,10 +154,16 @@ ol.inline > li {
     background-color: white;
     .border-radius(0px);
 
-    .nav > .active > a,
+    .nav > li > a:hover,
+    .nav > li > a:focus,
     .nav > .active > a:hover,
     .nav > .active > a:focus {
       color: #e74c3c;
+    }
+
+    .nav > .active > a,
+    .nav > .active > a:hover,
+    .nav > .active > a:focus {
       background-color: transparent;
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
