@@ -92,14 +92,6 @@ class User(db.Model):
     def username_i(cls):
         return CaseInsensitiveComparator(cls.username)
 
-    def active_projects(self, limit=5):
-        """
-        Return this users most active projets (by descending message count).
-        """
-        q = self.projects.order_by(False).order_by('-message_count')
-        q = q.limit(limit)
-        return q
-
     def in_group(self, name):
         """
         Returns ``True`` if this user is in the group `name`, otherwise

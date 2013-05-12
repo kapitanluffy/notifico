@@ -32,11 +32,11 @@ if __name__ == '__main__':
             'Flask-XML-RPC',
             'Flask-Mail',
             'Flask-Cache',
+            'Flask-OAuth'
             'fabric',
             'sqlalchemy',
             'UtopiaIRC',
             'gevent',
-            'oauth2',
             'redis',
             'gunicorn',
             'requests',

@@ -8,7 +8,6 @@ class CaseInsensitiveComparator(Comparator):
         return func.lower(self.__clause_element__()) == func.lower(other)
 
 from notifico.models.user import *
-from notifico.models.bot import *
 from notifico.models.channel import *
 from notifico.models.hook import *
 from notifico.models.project import *

@@ -12,17 +12,17 @@
         <ul class="nav nav-list">
           <li class="nav-header">Available Services</li>
           {% for s in services.values() %}
-          <li {% if s.SERVICE_ID == service.SERVICE_ID %}class="active"{% endif %}>
-            <a href="{{ url_for('.hook_new', username=user.username, projectname=project.name, serviceid=s.SERVICE_ID) }}">
-              {{ s.SERVICE_NAME }}
+          <li {% if s.service_id() == service.service_id() %}class="active"{% endif %}>
+            <a href="{{ url_for('.hook_new', username=user.username, projectname=project.name, serviceid=s.service_id()) }}">
+              {{ s.name() }}
             </a>
           </li>
           {% endfor %}
         </ul>
       </div>
       <div class="span8">
-        <h2>{{ service.SERVICE_NAME }}</h2>
-        {{ service.service_description()|safe }}
+        <h2>{{ service.name() }}</h2>
+        {{ service.description()|safe }}
         <div class="row-fluid" style="margin-top: 20px;">
           <div class="span12">
             <form class="form form-horizontal" method='POST' action="{{ request.url }}">

@@ -1,6 +1,5 @@
 # -*- coding: utf8 -*-
 
-
 class Service(type):
     """
     A simple metclass for services (such as hooks or importers) that

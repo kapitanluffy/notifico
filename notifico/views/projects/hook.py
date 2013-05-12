@@ -12,7 +12,6 @@ from flask import (
 from notifico import db, user_required
 from notifico.models import Hook, Project, User
 from notifico.views.projects import projects
-from notifico.services.hooks import HookService
 
 
 @projects.route('/h/<int:pid>/<key>', methods=['GET', 'POST'])
@@ -37,7 +36,7 @@ def hook_receive(pid, key):
         Project.message_count: Project.message_count + 1
     })
 
-    hook = HookService.services.get(h.service_id)
+    hook = HookExternalService.registered.get(h.service_id)
     if hook is None:
         # TODO: This should be logged somewhere.
         return ''
@@ -86,7 +85,7 @@ def hook_new(username, projectname, serviceid):
 
     # Find the service the user is trying to create a hook
     # for.
-    hook = HookService.services.get(serviceid)
+    hook = HookExternalService.registered.get(serviceid)
     if hook is None:
         flash(
             'There is no such hook service.',
@@ -101,15 +100,18 @@ def hook_new(username, projectname, serviceid):
         )
 
     # Check to see if that service implements a configuration form.
-    form = hook.form()
-    if form:
+    try:
+        form = hook.form()
+    except NotImplementedError:
+        form = None
+    else:
         form = form()
 
     return render_template(
         'hook/new.html',
         user=user,
         project=project,
-        services=HookService.services,
+        services=HookExternalService.registered,
         form=form,
         service=hook
     )
